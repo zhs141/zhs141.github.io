@@ -26,7 +26,7 @@
         <?php
             if(!file_exists("count.txt")){
             $one_file=fopen("count.txt","w+"); //建立一个统计文本，如果不存在就创建
-            echo"您是第<font color='red'><b>1</b></font>位访客"; //首次直接输出第一次
+            echo"您是第"<font color='red'><b>1</b></font>"位访客"; //首次直接输出第一次
             fwrite("count.txt","1");  //把数字1写入文本
             fclose("$one_file");
             }else{ //如果不是第一次访问直接读取内容，并+1,写入更新后再显示新的访客数
@@ -34,7 +34,7 @@
             $num++;
             file_put_contents("count.txt","$num");
             $newnum=file_get_contents("count.txt");
-            echo"您是第<font color='red'><b>".$newnum."</b></font>位访客";
+            echo"您是第"<font color='red'><b>".$newnum."</b></font>"位访客";
         }
         ?>
         <h1><br></h1>

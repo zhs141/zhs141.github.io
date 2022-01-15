@@ -14,7 +14,7 @@
 switch ($age)
 {
 case "张三":
-    Header("Location:https://zhs141.github.io/file");
+    Header("https://zhs141.github.io/file");
     break;
 default:
     echo "你输入的验证码是错误哒～";

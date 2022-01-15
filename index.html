@@ -26,7 +26,7 @@
         <h1><br></h1>
     </body>
 </html>
-<?php
+<h1><?php
     $fp=fopen("访客.txt",'r');
     fbb=fread($fp,filesize("访客.txt"));
     fclose($fp);
@@ -35,7 +35,7 @@
     fwrite($fp,$fbb);
     fclose($fp);
     echo "这个网页一共被访问了" . $fbb . '次';
-?>
+?></h1>
 <html>
     <body>
         <h1><br></h1>

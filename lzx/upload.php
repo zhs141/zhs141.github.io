@@ -1,4 +1,4 @@
-
+<h1>错误</h1>
 <?php
 if ($_FILES["file"]["error"] > 0)
 {

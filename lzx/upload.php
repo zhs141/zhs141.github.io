@@ -1,14 +1,13 @@
-<h1>错误</h1>
-<?php
-if ($_FILES["file"]["error"] > 0)
-{
-    echo "错误：" . $_FILES["file"]["error"] . "<br>";
-}
-else
-{
-    echo "上传文件名: " . $_FILES["file"]["name"] . "<br>";
-    echo "文件类型: " . $_FILES["file"]["type"] . "<br>";
-    echo "文件大小: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-    echo "文件临时存储的位置: " . $_FILES["file"]["tmp_name"];
-}
-?>
+var form = $("#upload-form");
+form.on('submit',function() {
+　　var seed = Math.floor(Math.random() * 1000);
+var id = "uploader-frame-" + seed;
+var callback = "uploader-cb-" + seed;
+
+var iframe = $('<iframe id="'+id+'" name="'+id+'" style="display:none;">');
+var url = form.attr('action');
+form.attr('target', id).append(iframe).attr('action', url + '?iframe=' + callback);
+<script type="text/javascript">
+　　window.top.window['callback'](data);
+</script>
+});

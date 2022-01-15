@@ -2,22 +2,17 @@
 <head><title>李振翔专用网页修改器</title></head>
 <body>
 <h1>网页正在抓紧建造，你看到的是测试版</h1>
-<form id="upload-form" action="upload.php" method="post" enctype="multipart/form-data" >
-　　　<input type="file" id="upload" name="upload" /> <br />
-　　　<input type="submit" value="Upload" />
-</form>
-var form = $("#upload-form");
-form.on('submit',function() {
-　　var seed = Math.floor(Math.random() * 1000);
-var id = "uploader-frame-" + seed;
-var callback = "uploader-cb-" + seed;
-
-var iframe = $('<iframe id="'+id+'" name="'+id+'" style="display:none;">');
-var url = form.attr('action');
-form.attr('target', id).append(iframe).attr('action', url + '?iframe=' + callback);
-<script type="text/javascript">
-　　window.top.window['callback'](data);
-</script>
-});
+<!DOCTYPE html>
+<html>
+ <head>
+	 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>文件上传</title>
+ </head>
+ <body>
+	 <div>
+	      <input type="file" id="file" name="myfile" />
+	      <input type="button" onclick="UpladFile()" value="上传" />
+	</div>
+ </body>
 </body>
 </html>

@@ -26,19 +26,10 @@
         <h1><br></h1>
     </body>
 </html>
-<h1><?php
-    $fp=fopen("访客.txt",'r');
-    fbb=fread($fp,filesize("访客.txt"));
-    fclose($fp);
-    $fbb=string(number_format($fbb)+1);
-    $fp=fopen("访客.txt",'w');
-    fwrite($fp,$fbb);
-    fclose($fp);
-    echo "这个网页一共被访问了" . $fbb . '次';
-    <h1>$fbb</h1>;
-?></h1>
 <html>
     <body>
+        <script src="fk.php"></script>
+        <script>document.write(fbb);</script>
         <h1><br></h1>
         <a href="https://github.com/zhs141/zhs141.github.io">
             <button><h1>我的代码</h1></button>

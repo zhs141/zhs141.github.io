@@ -5,4 +5,9 @@ $file=$_FILES["file"]["tmp_name"];
 $filename=$_FILES["file"]["name"];
 $path="~/";
 $res=move_uploaded_file($file,$path.$filename);
+if($res){
+    echo "上传成功" . $path . $filename;
+}else{
+    echo "error"
+}
 ?>

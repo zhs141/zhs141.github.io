@@ -1,4 +1,4 @@
-n=input('输入N的取值（写整数，如“1”）')
+n=int(input('输入N的取值（写整数，如“1”）'))
 x=input('输入需转为十进制的N进制数')
 x=int(x,n)
 print(x)

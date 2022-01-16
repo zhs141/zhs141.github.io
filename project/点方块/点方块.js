@@ -213,3 +213,4 @@ window.onload = function() {
             square.ydir = Math.floor(Math.random() * 2) * 2 - 1;
         }
     }
+}

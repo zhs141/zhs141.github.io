@@ -10,7 +10,7 @@
 </body>
 </html>
 //窗口加载完成后调用
-window.onload = function() {
+<script>window.onload = function() {
     // 获取画布及context（上下文）
     var canvas = document.getElementById("viewport"); 
     var context = canvas.getContext("2d");
@@ -213,4 +213,4 @@ window.onload = function() {
             square.ydir = Math.floor(Math.random() * 2) * 2 - 1;
         }
     }
-}
+}</script>

@@ -1,5 +1,5 @@
-n=int(input('输入N的取值（写整数，如“1”）'))
+n=input('输入N的取值（写整数，如“1”）')
 x=input('输入需转为八进制的N进制数')
-x=oct(x,n)
+x=oct(int(x,n))
 print(x)
 input('点击enter退出')

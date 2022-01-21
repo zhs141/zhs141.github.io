@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+        <script type="text/javascript" src="https://assets.pyecharts.org/assets/maps/china.js"></script>
+
+</head>
+<body>
+    <div id="c77df2f8fb55431c9d9a7c52c3c12c56" class="chart-container" style="width:1700px; height:1000px;"></div>
+    <script>
+        var chart_c77df2f8fb55431c9d9a7c52c3c12c56 = echarts.init(
+            document.getElementById('c77df2f8fb55431c9d9a7c52c3c12c56'), 'light', {renderer: 'canvas'});
+        var option_c77df2f8fb55431c9d9a7c52c3c12c56 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "series": [
+        {
+            "blendMode": 'lighter',
+            "type": "effectScatter",
+            "name": "\u56db\u5927\u76f4\u8f96\u5e02",
+            "coordinateSystem": "geo",
+            "showEffectOn": "render",
+            "rippleEffect": {
+                "show": true,
+                "brushType": "stroke",
+                "scale": 2,
+                "period": 2,
+                "color": "rgb(255,213,0)"
+            },
+            "symbolSize": 15,
+            "data": [
+                {
+                    "name": "\u5317\u4eac",
+                    "value": [
+                        116.407526,
+                        39.90403,
+                        []
+                    ]
+                },
+                {
+                    "name": "\u4e0a\u6d77",
+                    "value": [
+                        121.473701,
+                        31.230416,
+                        []
+                    ]
+                },
+                {
+                    "name": "\u5929\u6d25",
+                    "value": [
+                        117.200983,
+                        39.084158,
+                        []
+                    ]
+                },
+                {
+                    "name": "\u91cd\u5e86",
+                    "value": [
+                        106.551556,
+                        29.563009,
+                        []
+                    ]
+                }
+            ],
+            "label": {
+                "show": false,
+                "position": "top",
+                "margin": 8
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u56db\u5927\u76f4\u8f96\u5e02"
+            ],
+            "selected": {
+                "\u56db\u5927\u76f4\u8f96\u5e02": true
+            },
+            "show": true,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "formatter": function (params) {        return params.name + ' : ' + params.value[2];    },
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    },
+    "title": [
+        {
+            "text": "\u4e2d\u56fd\u56db\u5927\u76f4\u8f96\u5e02",
+            "padding": 5,
+            "itemGap": 10
+        }
+    ],
+    "geo": {
+        "map": "china",
+        "roam": true,
+        "itemStyle": {
+            "color": "rgb(32, 83, 204)",
+            "borderColor": "rgb(24, 213, 156)"
+        },
+        "emphasis": {}
+    }
+};
+        chart_c77df2f8fb55431c9d9a7c52c3c12c56.setOption(option_c77df2f8fb55431c9d9a7c52c3c12c56);
+    </script>
+</body>
+</html>

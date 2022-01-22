@@ -5,7 +5,6 @@
 它主要有以下用处：<br>
     -分享<a href='https://zhs141.github.io'>我的网站</a><br>
     -分享<a href='https://zhs141.github.io/file'>我的代码</a><br>
-    -制作<a href='https://zhs141.github.io/Python_Teach'>教程</a>
+    -制作<a href='https://zhs141.github.io/Python_Teach'>教程</a><br>
+当然，最重要的是——装B！
 </h3>
-<br>
-<h3>最重要的是——装B！</h3>

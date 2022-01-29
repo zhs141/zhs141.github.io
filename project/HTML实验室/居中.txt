@@ -1,0 +1,6 @@
+<style> 
+     body{text-align:center} 
+</style> 
+<body>
+    //
+</body>

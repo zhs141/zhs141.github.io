@@ -12,7 +12,7 @@ open = 1
 serversocket.listen(5)
 while 1:
     if open == 0:
-        break
+        sys.exit('程序关闭')
     print('服务器启动，监听中……')
     clientsocket,addr = serversocket.accept()
     puple = '连接地址：%s' % str(addr)

@@ -36,5 +36,16 @@ var _hmt = _hmt || [];
         <a href="https://zhs141.github.io/HELPME">
             <button><h1>＞帮张三宣传网站＜</h1></button>
         </a>
+        <input type="button" id="praise" value="赞(0)">
+        <script type="text/javascript">
+            function zan(){
+                var number=0;
+                return function(){
+                    this.value="赞("+(++number)+")";
+                }
+            }
+            var zz=zan();
+            document.getElementById('praise').onclick=zz;
+        </script>
     </body>
 </html>

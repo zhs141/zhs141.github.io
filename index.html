@@ -40,7 +40,23 @@ var _hmt = _hmt || [];
         <p>
         <h3>点个赞再走吧～</h3>
         <br>
-        
+        <a href="https://zhs141.github.io/tgdz.html"> <img src="image/点赞.png" width="100" height="100" /> </a>
+        <stricts>
+        const fs = require('fs');
+//调用fs.readFile()方法读取文件
+//参数1:读取文件的存放路径
+//参数2:读取文件时采用的编码格式,一般默认utf8
+//参数3:回调函数,拿到读取失败和成功的结果 err dataSt
+fs.readFile(dz.txt', 'utf8', function(err, dataStr) {
+    //打印失败的结果
+    // console.log(err); //如果读取成功 err的结果为null dataStr的值为undefined
+    if (err) { //err有内容则不为true
+        return console.log(err);
+    }
+    //打印成功的结果
+    console.log(dataStr);
+})
+        </scripts>
         </p>
     </body>
 </html>

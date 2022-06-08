@@ -8,8 +8,6 @@ var _hmt = _hmt || [];
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
-var openf1 = fso.OpenTextFile("dz.txt");
-var str2 = openf1.ReadAll();
 </script>
         <link rel="shortcut icon" href="http://zhs141.github.io/image/LX.ico" type="image/x-icon">
         <title>张三的网站</title>
@@ -45,6 +43,8 @@ var str2 = openf1.ReadAll();
         <a href="https://zhs141.github.io/tgdz.html"> <img src="image/赞.png" width="50" height="50" /> </a>
         <br>
         <script>
+        let openf1 = fso.OpenTextFile("dz.txt");
+        let str2 = openf1.ReadAll();
         document.write(str2);
         </script>
         </p>

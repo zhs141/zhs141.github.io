@@ -36,16 +36,59 @@ var _hmt = _hmt || [];
         <a href="https://zhs141.github.io/HELPME">
             <button><h1>＞帮张三宣传网站＜</h1></button>
         </a>
-        <input type="button" id="praise" value="赞(0)">
-        <script type="text/javascript">
-            function zan(){
-                var number=0;
-                return function(){
-                    this.value="赞("+(++number)+")";
-                }
-            }
-            var zz=zan();
-            document.getElementById('praise').onclick=zz;
-        </script>
+        <br><br>
+        <p>
+        <h3>点个赞再走吧～</h3>
+        <br>
+        <div class="wrap">
+			<ul>
+				<li><img src="../img/banner/1.png" ><br/><input type="button"value="赞(1)"/></li>
+				<li><img src="../img/banner/2.png" ><br/><input type="button"value="赞(1)"/></li>
+				<li><img src="../img/banner/3.png" ><br/><input type="button"value="赞(1)"/></li>
+				<li><img src="../img/banner/4.png" ><br/><input type="button"value="赞(1)"/></li>
+			</ul>
+		</div>
+<style>
+			.wrap{
+				width: 1000px;
+				height: 600px;
+				border: 1px solid #F1F1F1;
+				margin: 50px auto;
+			}
+			ul{
+				list-style-type: none;
+			}
+			ul li{
+				float: left;
+				margin-left:20px ;
+			}
+			li img{
+				width: 200px;
+				height: 250px;
+			}
+		</style>
+
+
+
+<script>
+			//封装一个通过标签名获取元素的函数
+			function tagName$(name){
+				return document.getElementsByTagName(name);
+			}
+			//通过闭包的方式获取数据，并缓存
+			//通过闭包，外层函数与内层函数之间的语句只会执行一次
+			function getvalue(){
+				var value=2;
+				return function(){
+					this.value="赞("+(value++)+")";
+				}
+			}
+			//循环遍历获取按钮
+			var button=tagName$("input");
+			for (var i=0;i<button.length;i++) {
+				button[i].οnclick=getvalue();
+			}
+		</script>
+        </p>
     </body>
 </html>

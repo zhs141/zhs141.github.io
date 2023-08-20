@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>条形码生成器</title>
+    <title>PDF转Word在线工具</title>
     <style>
         body {
             background-color: #99CCFF;
@@ -13,37 +13,61 @@
             font-size: 20px;
         }
 
-        input {
-            padding: 10px;
-            font-size: 16px;
+        input[type="file"] {
+            display: none;
         }
 
-        #barcode {
-            margin-top: 20px;
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #fff;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <label for="text">输入文本：</label>
-    <input type="text" id="text" placeholder="请输入要生成条形码的文本">
+    <label for="pdfFile">选择要转换的PDF文件：</label>
+    <input type="file" id="pdfFile" accept=".pdf">
 
-    <button onclick="generateBarcode()">生成条形码</button>
+    <button class="button" onclick="selectPDF()">选择文件</button>
+    <button class="button" onclick="convertToWord()">转换为Word</button>
 
-    <div id="barcode"></div>
+    <div id="result"></div>
 
-    <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        function generateBarcode() {
-            var text = document.getElementById('text').value;
-            var barcodeDiv = document.getElementById('barcode');
+        var selectedFile;
 
-            barcodeDiv.innerHTML = '';
+        function selectPDF() {
+            var fileInput = document.getElementById('pdfFile');
+            fileInput.click();
 
-            JsBarcode(barcodeDiv, text, {
-                format: "CODE128",
-                displayValue: true,
-                fontSize: 20,
-                margin: 10
+            fileInput.addEventListener('change', function(event) {
+                selectedFile = event.target.files[0];
+            });
+        }
+
+        function convertToWord() {
+            if (!selectedFile) {
+                alert('请先选择要转换的PDF文件');
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append('file', selectedFile);
+
+            axios.post('https://api.pdf2docx.com/v1/convert', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(function(response) {
+                var resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = '<a href="' + response.data.url + '">点击下载转换后的Word文件</a>';
+            })
+            .catch(function(error) {
+                console.error(error);
             });
         }
     </script>

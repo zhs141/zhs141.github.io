@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>轮盘密码生成与解码</title>
+    <style>
+        body {
+            background-color: #99CCFF;
+            text-align: center;
+            padding-top: 50px;
+        }
 
+        label {
+            font-size: 20px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <label for="text">输入文本：</label>
+    <input type="text" id="text" placeholder="请输入要生成或解码的文本">
+
+    <label for="key">密钥：</label>
+    <input type="text" id="key" placeholder="请输入密钥">
+
+    <button onclick="generateCipher()">生成轮盘密码</button>
+    <button onclick="decodeCipher()">解码轮盘密码</button>
+
+    <div id="result"></div>
+
+    <script>
+        function generateCipher() {
+            var text = document.getElementById('text').value;
+            var key = document.getElementById('key').value;
+            var resultDiv = document.getElementById('result');
+
+            var cipher = "";
+
+            for (var i = 0; i < text.length; i++) {
+                var charCode = text.charCodeAt(i);
+                var keyChar = key.charAt(i % key.length).charCodeAt(0);
+
+                var encodedCharCode = charCode + keyChar;
+                cipher += String.fromCharCode(encodedCharCode);
+            }
+
+            resultDiv.innerHTML = "生成的轮盘密码：" + cipher;
+        }
+
+        function decodeCipher() {
+            var text = document.getElementById('text').value;
+            var key = document.getElementById('key').value;
+            var resultDiv = document.getElementById('result');
+
+            var decodedText = "";
+
+            for (var i = 0; i < text.length; i++) {
+                var charCode = text.charCodeAt(i);
+                var keyChar = key.charAt(i % key.length).charCodeAt(0);
+
+                var decodedCharCode = charCode - keyChar;
+                decodedText += String.fromCharCode(decodedCharCode);
+            }
+
+            resultDiv.innerHTML = "解码的文本：" + decodedText;
+        }
+    </script>
+</body>
+</html>

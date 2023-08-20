@@ -1,154 +1,71 @@
+<!DOCTYPE html>
 <html>
+<head>
+  <title>轮盘密码生成器</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="number"] {
+      width: 50px;
+    }
+
+    button {
+      margin-top: 10px;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
 <body>
-<script>
-```javascript
-// 定义画布大小
-const canvasSize = 400;
-const tileSize = 20;
-const totalTiles = canvasSize / tileSize;
+  <div class="container">
+    <h1>轮盘密码生成器</h1>
+    <label for="inputText">输入文本：</label>
+    <textarea id="inputText" rows="4" cols="50"></textarea>
+    <label for="shift">移动位数：</label>
+    <input type="number" id="shift" min="1" max="25" value="1">
+    <button onclick="generateCipher()">生成密码</button>
+    <div class="result" id="result"></div>
+  </div>
 
-// 定义蛇的初始位置和速度
-let snake = [{ x: 10, y: 10 }];
-let dx = 0;
-let dy = 0;
+  <script>
+    function generateCipher() {
+      const inputText = document.getElementById("inputText").value;
+      const shift = parseInt(document.getElementById("shift").value);
 
-// 定义食物的初始位置
-let food = { x: 5, y: 5 };
+      let cipherText = "";
 
-// 定义分数和游戏状态
-let score = 0;
-let gameOver = false;
+      for (let i = 0; i < inputText.length; i++) {
+        let charCode = inputText.charCodeAt(i);
 
-// 获取画布元素
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
+        // 大写字母的范围是65-90
+        if (charCode >= 65 && charCode <= 90) {
+          charCode = ((charCode - 65 + shift) % 26) + 65;
+        }
+        // 小写字母的范围是97-122
+        else if (charCode >= 97 && charCode <= 122) {
+          charCode = ((charCode - 97 + shift) % 26) + 97;
+        }
 
-// 监听键盘事件
-document.addEventListener("keydown", changeDirection);
+        cipherText += String.fromCharCode(charCode);
+      }
 
-// 更新蛇的位置
-function updateSnake() {
-  const head = { x: snake[0].x + dx, y: snake[0].y + dy };
-  snake.unshift(head);
-
-  // 检查是否吃到食物
-  if (head.x === food.x && head.y === food.y) {
-    score += 10;
-    generateFood();
-  } else {
-    snake.pop();
-  }
-}
-
-// 生成新的食物位置
-function generateFood() {
-  food.x = Math.floor(Math.random() * totalTiles);
-  food.y = Math.floor(Math.random() * totalTiles);
-
-  // 确保食物不会生成在蛇的身体上
-  for (let i = 0; i < snake.length; i++) {
-    if (food.x === snake[i].x && food.y === snake[i].y) {
-      generateFood();
-      break;
+      document.getElementById("result").textContent = "密码结果： " + cipherText;
     }
-  }
-}
-
-// 绘制蛇和食物
-function draw() {
-  // 清空画布
-  ctx.clearRect(0, 0, canvasSize, canvasSize);
-
-  // 绘制蛇
-  snake.forEach((segment) => {
-    ctx.fillStyle = "green";
-    ctx.fillRect(segment.x * tileSize, segment.y * tileSize, tileSize, tileSize);
-  });
-
-  // 绘制食物
-  ctx.fillStyle = "red";
-  ctx.fillRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize);
-
-  // 绘制分数
-  ctx.fillStyle = "black";
-  ctx.font = "20px Arial";
-  ctx.fillText("Score: " + score, 10, 20);
-}
-
-// 检查游戏是否结束
-function checkGameOver() {
-  const head = snake[0];
-
-  // 检查蛇是否撞墙
-  if (
-    head.x < 0 ||
-    head.x >= totalTiles ||
-    head.y < 0 ||
-    head.y >= totalTiles
-  ) {
-    gameOver = true;
-  }
-
-  // 检查蛇是否撞到自己
-  for (let i = 1; i < snake.length; i++) {
-    if (head.x === snake[i].x && head.y === snake[i].y) {
-      gameOver = true;
-      break;
-    }
-  }
-}
-
-// 更新游戏状态
-function updateGame() {
-  if (gameOver) {
-    alert("游戏结束！您的得分为：" + score);
-    return;
-  }
-
-  updateSnake();
-  draw();
-  checkGameOver();
-
-  setTimeout(updateGame, 200);
-}
-
-// 根据按键改变蛇的移动方向
-function changeDirection(event) {
-  const LEFT_KEY = 37;
-  const UP_KEY = 38;
-  const RIGHT_KEY = 39;
-  const DOWN_KEY = 40;
-
-  const keyPressed = event.keyCode;
-
-  const goingUp = dy === -1;
-  const goingDown = dy === 1;
-  const goingLeft = dx === -1;
-  const goingRight = dx === 1;
-
-  if (keyPressed === LEFT_KEY && !goingRight) {
-    dx = -1;
-    dy = 0;
-  }
-
-  if (keyPressed === UP_KEY && !goingDown) {
-    dx = 0;
-    dy = -1;
-  }
-
-  if (keyPressed === RIGHT_KEY && !goingLeft) {
-    dx = 1;
-    dy = 0;
-  }
-
-  if (keyPressed === DOWN_KEY && !goingUp) {
-    dx = 0;
-    dy = 1;
-  }
-}
-
-// 启动游戏
-updateGame();
-</script>
+  </script>
 </body>
 </html>

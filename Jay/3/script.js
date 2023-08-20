@@ -7,11 +7,11 @@ generateBtn=wrapper.querySelector(".form button");//gets the form button css and
 generateBtn.addEventListener("click",()=>{
     let qrValue = qrInput.value;
     if(!qrValue) return;
-    generateBtn.innerText= "生成中...";
+    generateBtn.innerText= "Generating QR Code....";
     qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=${qrValue}`;
     qrImg.addEventListener("load", ()=>{
         wrapper.classList.add("active");
-        generateBtn.innerText= "生成";
+        generateBtn.innerText= "Generate QR Code";
     })
 
 });

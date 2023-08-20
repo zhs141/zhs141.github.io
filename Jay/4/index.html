@@ -1,71 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>轮盘密码生成器</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
+    <title>条形码生成器</title>
+    <style>
+        body {
+            background-color: #99CCFF;
+            text-align: center;
+            padding-top: 50px;
+        }
 
-    .container {
-      text-align: center;
-      margin-top: 50px;
-    }
+        label {
+            font-size: 20px;
+        }
 
-    label {
-      display: block;
-      margin-bottom: 10px;
-    }
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
 
-    input[type="number"] {
-      width: 50px;
-    }
-
-    button {
-      margin-top: 10px;
-    }
-
-    .result {
-      margin-top: 20px;
-      font-weight: bold;
-    }
-  </style>
+        #barcode {
+            margin-top: 20px;
+        }
+    </style>
 </head>
-<body bgcolor="#99CCFF">
-  <div class="container">
-    <h1>轮盘密码生成器</h1>
-    <label for="inputText">输入文本：</label>
-    <textarea id="inputText" rows="4" cols="50"></textarea>
-    <label for="shift">移动位数：</label>
-    <input type="number" id="shift" min="1" max="25" value="1">
-    <button onclick="generateCipher()">生成密码</button>
-    <div class="result" id="result"></div>
-  </div>
+<body>
+    <label for="text">输入文本：</label>
+    <input type="text" id="text" placeholder="请输入要生成条形码的文本">
 
-  <script>
-    function generateCipher() {
-      const inputText = document.getElementById("inputText").value;
-      const shift = parseInt(document.getElementById("shift").value);
+    <button onclick="generateBarcode()">生成条形码</button>
 
-      let cipherText = "";
+    <div id="barcode"></div>
 
-      for (let i = 0; i < inputText.length; i++) {
-        let charCode = inputText.charCodeAt(i);
+    <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+    <script>
+        function generateBarcode() {
+            var text = document.getElementById('text').value;
+            var barcodeDiv = document.getElementById('barcode');
 
-        // 大写字母的范围是65-90
-        if (charCode >= 65 && charCode <= 90) {
-          charCode = ((charCode - 65 + shift) % 26) + 65;
+            barcodeDiv.innerHTML = '';
+
+            JsBarcode(barcodeDiv, text, {
+                format: "CODE128",
+                displayValue: true,
+                fontSize: 20,
+                margin: 10
+            });
         }
-        // 小写字母的范围是97-122
-        else if (charCode >= 97 && charCode <= 122) {
-          charCode = ((charCode - 97 + shift) % 26) + 97;
-        }
-
-        cipherText += String.fromCharCode(charCode);
-      }
-
-      document.getElementById("result").textContent = "密码结果： " + cipherText;
-    }
-  </script>
+    </script>
 </body>
 </html>

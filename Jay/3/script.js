@@ -9,7 +9,7 @@ generateBtn.addEventListener("click",()=>{
     if(!qrValue) return;
     generateBtn.innerText= "生成中...";
     qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=${qrValue}`;
-    qrImg.addEventListener("load..", ()=>{
+    qrImg.addEventListener("load", ()=>{
         wrapper.classList.add("active");
         generateBtn.innerText= "生成";
     })

@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var gameContainer = document.getElementById('game-container');
     var player = document.getElementById('player');
     var scoreElement = document.getElementById('score');
+    var moveLeftButton = document.getElementById('move-left');
+    var moveRightButton = document.getElementById('move-right');
     var score = 0;
     var obstacles = [];
 
@@ -85,13 +87,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
 
     player.bullets = [];
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'ArrowLeft') {
-            movePlayer('left');
-        } else if (event.key === 'ArrowRight') {
-            movePlayer('right');
-        } else if (event.key === ' ') {
-            shoot();
-        }
+    var shootInterval = setInterval(function() {
+        shoot();
+    }, 500);
+
+    moveLeftButton.addEventListener('click', function() {
+        movePlayer('left');
+    });
+
+    moveRightButton.addEventListener('click', function() {
+        movePlayer('right');
     });
 });

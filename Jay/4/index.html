@@ -1,48 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dinosaur Game</title>
+    <title>进制转换器</title>
     <style>
-        #game-container {
-            width: 600px;
-            height: 200px;
-            border: 2px solid black;
-            position: relative;
+        body {
+            background-color: #99CCFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        #dinosaur {
-            width: 50px;
-            height: 50px;
-            background-color: green;
-            position: absolute;
-            bottom: 0;
-            left: 0;
+        
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
         }
-        .cactus {
-            width: 20px;
-            height: 50px;
-            background-color: brown;
-            position: absolute;
-            bottom: 0;
+        
+        input[type="text"], select, button {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: none;
         }
-        #score {
-            font-size: 24px;
-            margin-top: 10px;
-        }
-        #jump-button {
-            font-size: 18px;
-            padding: 10px 20px;
-            margin-top: 10px;
+        
+        button {
+            background-color: black;
+            color: white;
             cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>Dinosaur Game</h1>
-    <div id="game-container">
-        <div id="dinosaur"></div>
+    <div class="container">
+        <h1>进制转换器</h1>
+        <input type="text" id="input" placeholder="输入数字或字母">
+        <select id="inputBase">
+            <option value="2">二进制</option>
+            <option value="8">八进制</option>
+            <option value="10" selected>十进制</option>
+            <option value="16">十六进制</option>
+        </select>
+        <select id="outputBase">
+            <option value="2">二进制</option>
+            <option value="8">八进制</option>
+            <option value="10" selected>十进制</option>
+            <option value="16">十六进制</option>
+        </select>
+        <button onclick="convert()">转换</button>
+        <div id="output"></div>
     </div>
-    <div id="score">Score: 0</div>
-    <button id="jump-button">Jump</button>
-    <script src="game.js"></script>
+
+    <script>
+        function convert() {
+            var input = document.getElementById("input").value;
+            var inputBase = parseInt(document.getElementById("inputBase").value);
+            var outputBase = parseInt(document.getElementById("outputBase").value);
+            var output = document.getElementById("output");
+            
+            // 进制转换
+            var result = parseInt(input, inputBase).toString(outputBase).toUpperCase();
+            
+            output.innerHTML = "转换结果: " + result;
+        }
+    </script>
 </body>
 </html>

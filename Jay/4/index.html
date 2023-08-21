@@ -24,11 +24,21 @@
             height: 50px;
             background-color: red;
         }
+        .bullet {
+            position: absolute;
+            width: 5px;
+            height: 10px;
+            background-color: yellow;
+        }
         #score {
             position: absolute;
             top: 10px;
             right: 10px;
             font-size: 20px;
+        }
+        #controls {
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -36,6 +46,10 @@
     <div id="game-container">
         <div id="player"></div>
         <div id="score">Score: 0</div>
+    </div>
+    <div id="controls">
+        <button id="move-left">向左移动</button>
+        <button id="move-right">向右移动</button>
     </div>
     <script src="game.js"></script>
 </body>

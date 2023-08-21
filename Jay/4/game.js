@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function gameOver() {
         clearInterval(gameInterval);
+        clearInterval(shootInterval);
         alert('游戏结束，得分：' + score);
     }
 
@@ -91,11 +92,25 @@ document.addEventListener('DOMContentLoaded', function() {
         shoot();
     }, 500);
 
-    moveLeftButton.addEventListener('click', function() {
-        movePlayer('left');
+    var moveLeftInterval;
+    moveLeftButton.addEventListener('mousedown', function() {
+        moveLeftInterval = setInterval(function() {
+            movePlayer('left');
+        }, 100);
     });
 
-    moveRightButton.addEventListener('click', function() {
-        movePlayer('right');
+    moveLeftButton.addEventListener('mouseup', function() {
+        clearInterval(moveLeftInterval);
+    });
+
+    var moveRightInterval;
+    moveRightButton.addEventListener('mousedown', function() {
+        moveRightInterval = setInterval(function() {
+            movePlayer('right');
+        }, 100);
+    });
+
+    moveRightButton.addEventListener('mouseup', function() {
+        clearInterval(moveRightInterval);
     });
 });

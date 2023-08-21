@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>提取网页中的网址</title>
+    <script>
+        function extractURLs() {
+            var url = document.getElementById("urlInput").value;
+            
+            // 创建一个XMLHttpRequest对象
+            var xhr = new XMLHttpRequest();
+            
+            // 设置请求方式和URL
+            xhr.open("GET", url, true);
+            
+            // 注册回调函数，处理响应结果
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var responseText = xhr.responseText;
+                    var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/g;
+                    var matches;
+                    var urls = [];
+                    
+                    while (matches = regex.exec(responseText)) {
+                        urls.push(matches[2]);
+                    }
+                    
+                    var outputElement = document.getElementById("output");
+                    outputElement.innerHTML = "";
+                    
+                    urls.forEach(function(url) {
+                        var link = document.createElement("a");
+                        link.href = url;
+                        link.innerText = url;
+                        
+                        var br = document.createElement("br");
+                        
+                        outputElement.appendChild(link);
+                        outputElement.appendChild(br);
+                    });
+                }
+            };
+            
+            // 发送请求
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h1>提取网页中的网址</h1>
+    <input type="text" id="urlInput" placeholder="输入网址">
+    <button onclick="extractURLs()">提取</button>
+    <div id="output"></div>
+</body>
+</html>
 

@@ -1,68 +1,97 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const gameContainer = document.getElementById('game-container');
-    const dinosaur = document.getElementById('dinosaur');
-    const scoreDisplay = document.getElementById('score');
-    const jumpButton = document.getElementById('jump-button');
-    let score = 0;
-    let isJumping = false;
+document.addEventListener('DOMContentLoaded', function() {
+    var gameContainer = document.getElementById('game-container');
+    var player = document.getElementById('player');
+    var scoreElement = document.getElementById('score');
+    var score = 0;
+    var obstacles = [];
 
-    function jump() {
-        if (!isJumping) {
-            isJumping = true;
-            let position = 0;
-            let timerId = setInterval(() => {
-                if (position === 150) {
-                    clearInterval(timerId);
-                    let downTimerId = setInterval(() => {
-                        if (position === 0) {
-                            clearInterval(downTimerId);
-                            isJumping = false;
-                        }
-                        position -= 30;
-                        dinosaur.style.bottom = position + 'px';
-                    }, 20);
-                }
-                position += 30;
-                dinosaur.style.bottom = position + 'px';
-            }, 20);
-        }
+    function createObstacle() {
+        var obstacle = document.createElement('div');
+        obstacle.className = 'obstacle';
+        obstacle.style.left = Math.random() * (gameContainer.offsetWidth - obstacle.offsetWidth) + 'px';
+        gameContainer.appendChild(obstacle);
+        obstacles.push(obstacle);
     }
 
-    jumpButton.addEventListener('click', jump);
+    function moveObstacles() {
+        for (var i = 0; i < obstacles.length; i++) {
+            var obstacle = obstacles[i];
+            obstacle.style.top = obstacle.offsetTop + 10 + 'px';
 
-    function generateCactus() {
-        const cactus = document.createElement('div');
-        let cactusPosition = 600;
-        let randomTime = Math.random() * 6000;
-
-        cactus.classList.add('cactus');
-        gameContainer.appendChild(cactus);
-        cactus.style.left = cactusPosition + 'px';
-
-        let timerId = setInterval(() => {
-            if (cactusPosition < -20) {
-                clearInterval(timerId);
-                gameContainer.removeChild(cactus);
-                score += 100;
-                scoreDisplay.textContent = 'Score: ' + score;
-            } else if (cactusPosition > 0 && cactusPosition < 60 && position < 60) {
-                clearInterval(timerId);
-                gameContainer.removeChild(cactus);
-                alert('Game Over. Final Score: ' + score);
-                score = 0;
-                scoreDisplay.textContent = 'Score: ' + score;
-            } else {
-                cactusPosition -= 10;
-                cactus.style.left = cactusPosition + 'px';
+            if (obstacle.offsetTop + obstacle.offsetHeight > gameContainer.offsetHeight) {
+                gameOver();
+                return;
             }
-        }, 20);
 
-        if (score < 10000) {
-            setTimeout(generateCactus, randomTime);
-        } else {
-            alert('Congratulations! You reached the finish line.');
+            if (obstacle.offsetTop + obstacle.offsetHeight >= player.offsetTop &&
+                obstacle.offsetTop <= player.offsetTop + player.offsetHeight &&
+                obstacle.offsetLeft + obstacle.offsetWidth >= player.offsetLeft &&
+                obstacle.offsetLeft <= player.offsetLeft + player.offsetWidth) {
+                gameOver();
+                return;
+            }
+
+            for (var j = 0; j < player.bullets.length; j++) {
+                var bullet = player.bullets[j];
+                if (bullet.offsetTop + bullet.offsetHeight >= obstacle.offsetTop &&
+                    bullet.offsetTop <= obstacle.offsetTop + obstacle.offsetHeight &&
+                    bullet.offsetLeft + bullet.offsetWidth >= obstacle.offsetLeft &&
+                    bullet.offsetLeft <= obstacle.offsetLeft + obstacle.offsetWidth) {
+                    gameContainer.removeChild(bullet);
+                    player.bullets.splice(j, 1);
+                    gameContainer.removeChild(obstacle);
+                    obstacles.splice(i, 1);
+                    score++;
+                    scoreElement.textContent = 'Score: ' + score;
+                    break;
+                }
+            }
         }
     }
 
-    generateCactus();
+    function gameOver() {
+        clearInterval(gameInterval);
+        alert('游戏结束，得分：' + score);
+    }
+
+    function movePlayer(direction) {
+        var step = 20;
+        var left = player.offsetLeft;
+        if (direction === 'left') {
+            left -= step;
+        } else if (direction === 'right') {
+            left += step;
+        }
+        if (left < 0) {
+            left = 0;
+        } else if (left + player.offsetWidth > gameContainer.offsetWidth) {
+            left = gameContainer.offsetWidth - player.offsetWidth;
+        }
+        player.style.left = left + 'px';
+    }
+
+    function shoot() {
+        var bullet = document.createElement('div');
+        bullet.className = 'bullet';
+        bullet.style.left = player.offsetLeft + player.offsetWidth / 2 + 'px';
+        bullet.style.top = player.offsetTop - bullet.offsetHeight + 'px';
+        gameContainer.appendChild(bullet);
+        player.bullets.push(bullet);
+    }
+
+    var gameInterval = setInterval(function() {
+        createObstacle();
+        moveObstacles();
+    }, 1000);
+
+    player.bullets = [];
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowLeft') {
+            movePlayer('left');
+        } else if (event.key === 'ArrowRight') {
+            movePlayer('right');
+        } else if (event.key === ' ') {
+            shoot();
+        }
+    });
 });

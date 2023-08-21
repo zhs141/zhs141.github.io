@@ -1,69 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>进制转换器</title>
+    <title>战斗机攻城游戏</title>
     <style>
-        body {
-            background-color: #99CCFF;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        #game-container {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            border: 1px solid black;
         }
-        
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
+        #player {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: blue;
         }
-        
-        input[type="text"], select, button {
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: none;
+        .obstacle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: red;
         }
-        
-        button {
-            background-color: black;
-            color: white;
-            cursor: pointer;
+        #score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>进制转换器</h1>
-        <h2>注：转换器无法转换字符</h2>
-        <input type="text" id="input" placeholder="输入数字">
-        <select id="inputBase">
-            <option value="2">二进制</option>
-            <option value="8">八进制</option>
-            <option value="10" selected>十进制</option>
-            <option value="16">十六进制</option>
-        </select>
-        <select id="outputBase">
-            <option value="2">二进制</option>
-            <option value="8">八进制</option>
-            <option value="10" selected>十进制</option>
-            <option value="16">十六进制</option>
-        </select>
-        <button onclick="convert()">转换</button>
-        <div id="output"></div>
+    <div id="game-container">
+        <div id="player"></div>
+        <div id="score">Score: 0</div>
     </div>
-
-    <script>
-        function convert() {
-            var input = document.getElementById("input").value;
-            var inputBase = parseInt(document.getElementById("inputBase").value);
-            var outputBase = parseInt(document.getElementById("outputBase").value);
-            var output = document.getElementById("output");
-            
-            // 进制转换
-            var result = parseInt(input, inputBase).toString(outputBase).toUpperCase();
-            
-            output.innerHTML = "转换结果: " + result;
-        }
-    </script>
+    <script src="game.js"></script>
 </body>
 </html>

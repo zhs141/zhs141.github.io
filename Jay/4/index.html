@@ -37,21 +37,6 @@
     <div class="container">
         <div class="box">
             <input type="text" class="input" placeholder="请输入文字">
-            <select id="language" class="input">
-                <option value="zh">中文</option>
-                <option value="en">英文</option>
-            </select>
-            <select id="speed" class="input">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-            </select>
             <button class="button" onclick="convertText()">跳转</button>
         </div>
     </div>
@@ -59,9 +44,7 @@
     <script>
         function convertText() {
             var text = document.querySelector('.input').value;
-            var language = document.getElementById('language').value;
-            var speed = document.getElementById('speed').value;
-            var urlgoto = " http://tts.baidu.com/text2audio?lan=" + language + "&ie=UTF-8&spd=" + speed + "&text=" + text;
+            var urlgoto = " https://api.vvhan.com/api/song?txt=" +  text;
              window.location.href=urlgoto;
         }
     </script>

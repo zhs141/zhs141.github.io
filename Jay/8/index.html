@@ -1,131 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>随机迷宫生成器</title>
+    <title>RGB调色器</title>
     <style>
-        .cell {
-            width: 20px;
-            height: 20px;
-            border: 1px solid #000;
+        body {
+            background-color: #99CCFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
             background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider {
+            width: 200px;
+            margin-bottom: 10px;
+        }
+
+        .color-box {
+            width: 200px;
+            height: 200px;
+            margin-top: 20px;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <button onclick="generateMaze()">生成迷宫</button>
-    <div id="maze"></div>
+    <div class="container">
+        <input type="range" class="slider" min="0" max="255" value="0" id="redSlider">
+        <input type="range" class="slider" min="0" max="255" value="0" id="greenSlider">
+        <input type="range" class="slider" min="0" max="255" value="0" id="blueSlider">
+        <div class="color-box" id="colorBox"></div>
+    </div>
 
     <script>
-        const mazeWidth = 30;
-        const mazeHeight = 20;
-        const maze = [];
-        const stack = [];
+        const redSlider = document.getElementById("redSlider");
+        const greenSlider = document.getElementById("greenSlider");
+        const blueSlider = document.getElementById("blueSlider");
+        const colorBox = document.getElementById("colorBox");
 
-        // 初始化迷宫
-        function initMaze() {
-            for (let row = 0; row < mazeHeight; row++) {
-                maze[row] = [];
-                for (let col = 0; col < mazeWidth; col++) {
-                    maze[row][col] = {
-                        visited: false,
-                        topWall: true,
-                        rightWall: true,
-                        bottomWall: true,
-                        leftWall: true
-                    };
-                }
-            }
-        }
+        redSlider.addEventListener("input", updateColor);
+        greenSlider.addEventListener("input", updateColor);
+        blueSlider.addEventListener("input", updateColor);
 
-        // 随机选择一个未访问过的相邻单元格
-        function getRandomNeighbor(row, col) {
-            const neighbors = [];
+        function updateColor() {
+            const red = redSlider.value;
+            const green = greenSlider.value;
+            const blue = blueSlider.value;
 
-            if (row > 0 && !maze[row - 1][col].visited) {
-                neighbors.push({ row: row - 1, col });
-            }
-            if (col < mazeWidth - 1 && !maze[row][col + 1].visited) {
-                neighbors.push({ row, col: col + 1 });
-            }
-            if (row < mazeHeight - 1 && !maze[row + 1][col].visited) {
-                neighbors.push({ row: row + 1, col });
-            }
-            if (col > 0 && !maze[row][col - 1].visited) {
-                neighbors.push({ row, col: col - 1 });
-            }
-
-            if (neighbors.length === 0) {
-                return null;
-            }
-
-            const randomIndex = Math.floor(Math.random() * neighbors.length);
-            return neighbors[randomIndex];
-        }
-
-        // 生成迷宫
-        function generateMaze() {
-            initMaze();
-            stack.length = 0;
-            const mazeDiv = document.getElementById("maze");
-            mazeDiv.innerHTML = "";
-
-            const startRow = Math.floor(Math.random() * mazeHeight);
-            const startCol = Math.floor(Math.random() * mazeWidth);
-            stack.push({ row: startRow, col: startCol });
-
-            while (stack.length > 0) {
-                const currentCell = stack[stack.length - 1];
-                const { row, col } = currentCell;
-                maze[row][col].visited = true;
-
-                const nextCell = getRandomNeighbor(row, col);
-                if (nextCell) {
-                    stack.push(nextCell);
-
-                    // 移除墙壁
-                    if (nextCell.row < row) {
-                        maze[nextCell.row][nextCell.col].bottomWall = false;
-                        maze[row][col].topWall = false;
-                    } else if (nextCell.col > col) {
-                        maze[nextCell.row][nextCell.col].leftWall = false;
-                        maze[row][col].rightWall = false;
-                    } else if (nextCell.row > row) {
-                        maze[nextCell.row][nextCell.col].topWall = false;
-                        maze[row][col].bottomWall = false;
-                    } else if (nextCell.col < col) {
-                        maze[nextCell.row][nextCell.col].rightWall = false;
-                        maze[row][col].leftWall = false;
-                    }
-                } else {
-                    stack.pop();
-                }
-            }
-
-            // 绘制迷宫
-            for (let row = 0; row < mazeHeight; row++) {
-                for (let col = 0; col < mazeWidth; col++) {
-                    const cell = maze[row][col];
-                    const cellDiv = document.createElement("div");
-                    cellDiv.className = "cell";
-
-                    if (cell.topWall) {
-                        cellDiv.style.borderTopColor = "#000";
-                    }
-                    if (cell.rightWall) {
-                        cellDiv.style.borderRightColor = "#000";
-                    }
-                    if (cell.bottomWall) {
-                        cellDiv.style.borderBottomColor = "#000";
-                    }
-                    if (cell.leftWall) {
-                        cellDiv.style.borderLeftColor = "#000";
-                    }
-
-                    mazeDiv.appendChild(cellDiv);
-                }
-            }
+            const color = `rgb(${red}, ${green}, ${blue})`;
+            colorBox.style.backgroundColor = color;
         }
     </script>
 </body>
 </html>
-

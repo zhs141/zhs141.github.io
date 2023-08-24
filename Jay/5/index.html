@@ -1,84 +1,93 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>高级密码生成工具</title>     <style>  
-          body {  
-              background-color: #99CCFF;  
-              display: flex;  
-              justify-content: center;  
-              align-items: center;  
-              height: 100vh;  
-          }  
-  
-          .container {  
-              background-color: white;  
-              padding: 20px;  
-              border-radius: 10px;  
-          }  
-  
-          input[type="text"], select, button {  
-              padding: 10px;  
-              margin-bottom: 10px;  
-              border-radius: 5px;  
-              border: none;  
-          }  
-  
-          button {  
-              background-color: black;  
-              color: white;  
-              cursor: pointer;  
-          }  
-      </style>  
-  </head>  
-  <body>  
-      <div class="container"> 
-    <label for="text">输入文本：</label>
-    <input type="text" id="text" placeholder="请输入要生成或解码的文本">
-
-    <label for="key">密钥：</label>
-    <input type="text" id="key" placeholder="请输入密钥">
-
-    <button onclick="generateCipher()">生成轮盘密码</button>
-    <button onclick="decodeCipher()">解码轮盘密码</button>
-
-    <div id="result"></div>
-
-    <script>
-        function generateCipher() {
-            var text = document.getElementById('text').value;
-            var key = document.getElementById('key').value;
-            var resultDiv = document.getElementById('result');
-
-            var cipher = "";
-
-            for (var i = 0; i < text.length; i++) {
-                var charCode = text.charCodeAt(i);
-                var keyChar = key.charAt(i % key.length).charCodeAt(0);
-
-                var encodedCharCode = charCode + keyChar;
-                cipher += String.fromCharCode(encodedCharCode);
-            }
-
-            resultDiv.innerHTML = "生成的轮盘密码：" + cipher;
+    <title>轮盘密码工具</title>
+    <style>
+        body {
+            background-color: #99CCFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
-        function decodeCipher() {
-            var text = document.getElementById('text').value;
-            var key = document.getElementById('key').value;
-            var resultDiv = document.getElementById('result');
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
 
-            var decodedText = "";
+        .input-field {
+            margin-bottom: 10px;
+        }
 
-            for (var i = 0; i < text.length; i++) {
-                var charCode = text.charCodeAt(i);
-                var keyChar = key.charAt(i % key.length).charCodeAt(0);
+        .button {
+            background-color: #000;
+            color: #fff;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-field">
+            <label for="text">文本:</label>
+            <input type="text" id="text">
+        </div>
+        <div class="input-field">
+            <label for="key">密钥:</label>
+            <input type="text" id="key">
+        </div>
+        <button class="button" id="encryptButton">加密</button>
+        <button class="button" id="decryptButton">解密</button>
+        <div class="input-field">
+            <label for="result">结果:</label>
+            <input type="text" id="result" readonly>
+        </div>
+    </div>
 
-                var decodedCharCode = charCode - keyChar;
-                decodedText += String.fromCharCode(decodedCharCode);
+    <script>
+        const textInput = document.getElementById("text");
+        const keyInput = document.getElementById("key");
+        const encryptButton = document.getElementById("encryptButton");
+        const decryptButton = document.getElementById("decryptButton");
+        const resultInput = document.getElementById("result");
+
+        encryptButton.addEventListener("click", encrypt);
+        decryptButton.addEventListener("click", decrypt);
+
+        function encrypt() {
+            const text = textInput.value;
+            const key = keyInput.value;
+
+            let encryptedText = "";
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const keyChar = key[i % key.length];
+                const encryptedChar = String.fromCharCode(char.charCodeAt(0) ^ keyChar.charCodeAt(0));
+                encryptedText += encryptedChar;
             }
 
-            resultDiv.innerHTML = "解码的文本：" + decodedText;
+            resultInput.value = encryptedText;
+        }
+
+        function decrypt() {
+            const encryptedText = textInput.value;
+            const key = keyInput.value;
+
+            let decryptedText = "";
+            for (let i = 0; i < encryptedText.length; i++) {
+                const char = encryptedText[i];
+                const keyChar = key[i % key.length];
+                const decryptedChar = String.fromCharCode(char.charCodeAt(0) ^ keyChar.charCodeAt(0));
+                decryptedText += decryptedChar;
+            }
+
+            resultInput.value = decryptedText;
         }
     </script>
 </body>

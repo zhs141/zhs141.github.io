@@ -2,30 +2,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>高级密码生成工具</title>
-    <style>
-        body {
-            background-color: #99CCFF;
-            text-align: center;
-            padding-top: 50px;
-        }
-
-        label {
-            font-size: 20px;
-        }
-
-        input {
-            padding: 10px;
-            font-size: 16px;
-        }
-
-        #result {
-            margin-top: 20px;
-            font-size: 20px;
-        }
-    </style>
-</head>
-<body>
+    <title>高级密码生成工具</title>     <style>  
+          body {  
+              background-color: #99CCFF;  
+              display: flex;  
+              justify-content: center;  
+              align-items: center;  
+              height: 100vh;  
+          }  
+  
+          .container {  
+              background-color: white;  
+              padding: 20px;  
+              border-radius: 10px;  
+          }  
+  
+          input[type="text"], select, button {  
+              padding: 10px;  
+              margin-bottom: 10px;  
+              border-radius: 5px;  
+              border: none;  
+          }  
+  
+          button {  
+              background-color: black;  
+              color: white;  
+              cursor: pointer;  
+          }  
+      </style>  
+  </head>  
+  <body>  
+      <div class="container"> 
     <label for="text">输入文本：</label>
     <input type="text" id="text" placeholder="请输入要生成或解码的文本">
 

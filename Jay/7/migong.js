@@ -418,7 +418,7 @@ function updateEmo(lr) {
       emo.innerHTML = "😣";
     }
     if (thingie.offsetLeft < maxl - 6 * step) {
-      emo.innerHTML = "🤬";
+      emo.innerHTML = "🐥";
     }
     if (thingie.offsetLeft > prevl) {
       emo.innerHTML = "😐";

@@ -39,7 +39,7 @@ body {
 .buttons {
   width: 210px;
   height: 140px;
-  background: #222;
+  background: #99CCFF;
   align-self: center;
   justify-self: center;
   display: grid;
@@ -139,7 +139,7 @@ button {
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: none;
+  background: #222;
   -webkit-tap-highlight-color: transparent;
 }
 

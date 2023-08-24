@@ -1,4 +1,4 @@
-@const cont = document.getElementById("container");
+const cont = document.getElementById("container");
 const maze = document.getElementById("maze");
 const thingie = document.getElementById("thingie");
 const home = document.getElementById("home");
@@ -409,36 +409,36 @@ function updateEmo(lr) {
   //simple/manual emo-adjustment - old
   if (lr) {
     if (thingie.offsetLeft < maxl) {
-      emo.innerHTML = "🐶";
+      emo.innerHTML = "🙄";
     }
     if (thingie.offsetLeft < maxl - 2 * step) {
-      emo.innerHTML = "🐮";
+      emo.innerHTML = "😒";
     }
     if (thingie.offsetLeft < maxl - 4 * step) {
-      emo.innerHTML = "🐔";
+      emo.innerHTML = "😣";
     }
     if (thingie.offsetLeft < maxl - 6 * step) {
-      emo.innerHTML = "🐤";
+      emo.innerHTML = "🤬";
     }
     if (thingie.offsetLeft > prevl) {
-      emo.innerHTML = "🌑";
+      emo.innerHTML = "😐";
     }
     if (thingie.offsetLeft >= maxl) {
       if (thingie.offsetLeft > mazeWidth * 0.6) {
-        emo.innerHTML = "🐏";
+        emo.innerHTML = "😀";
       } else {
-        emo.innerHTML = "🌖";
+        emo.innerHTML = "🙂";
       }
       maxl = thingie.offsetLeft;
     }
     if (thingie.offsetLeft === 0) {
-      emo.innerHTML = "🌗";
+      emo.innerHTML = "😢";
     }
     if (
       thingie.offsetLeft > mazeWidth - step &&
       thingie.offsetTop === home.offsetTop
     ) {
-      emo.innerHTML = "🌘";
+      emo.innerHTML = "🤗";
       home.innerHTML = "🏠";
     }
     if (thingie.offsetLeft > mazeWidth) {
@@ -448,10 +448,10 @@ function updateEmo(lr) {
     prevl = thingie.offsetLeft;
   } else {
     if (thingie.offsetLeft > (mazeWidth - step) && thingie.offsetTop === home.offsetTop) {
-      emo.innerHTML = "🌏";
+      emo.innerHTML = "🤗";
     }else{
       if(thingie.offsetLeft > (mazeWidth - step) && thingie.offsetTop != home.offsetTo){
-        emo.innerHTML = "🍀";
+        emo.innerHTML = "🙄";
       }
     }
   }

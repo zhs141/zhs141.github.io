@@ -1,1 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>三体系统</title>
+  <style>
+    body {
+      background-color: #99CCFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    
+    #container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    
+    button {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>三体系统</h1>
+    <div id="particles"></div>
+    <button id="startButton">开始</button>
+    <button id="stopButton">停止</button>
+  </div>
 
+  <script>
+    var particlesContainer = document.getElementById('particles');
+    var startButton = document.getElementById('startButton');
+    var stopButton = document.getElementById('stopButton');
+    var particles = [];
+
+    function Particle(x, y) {
+      this.x = x;
+      this.y = y;
+      this.vx = Math.random() * 2 - 1;
+      this.vy = Math.random() * 2 - 1;
+      this.element = document.createElement('div');
+      this.element.className = 'particle';
+      this.element.style.left = this.x + 'px';
+      this.element.style.top = this.y + 'px';
+      particlesContainer.appendChild(this.element);
+    }
+
+    Particle.prototype.update = function() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.element.style.left = this.x + 'px';
+      this.element.style.top = this.y + 'px';
+    };
+
+    function createParticles() {
+      for (var i = 0; i < 50; i++) {
+        var x = Math.random() * particlesContainer.offsetWidth;
+        var y = Math.random() * particlesContainer.offsetHeight;
+        particles.push(new Particle(x, y));
+      }
+    }
+
+    function updateParticles() {
+      for (var i = 0; i < particles.length; i++) {
+        particles[i].update();
+      }
+    }
+
+    startButton.addEventListener('click', function() {
+      createParticles();
+      setInterval(updateParticles, 1000 / 60);
+    });
+
+    stopButton.addEventListener('click', function() {
+      particlesContainer.innerHTML = '';
+      particles = [];
+    });
+  </script>
+</body>
+</html>

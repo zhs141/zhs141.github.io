@@ -3,7 +3,7 @@ var canvas = document.getElementById("gameCanvas");
 var ctx = canvas.getContext("2d");
 
 // 定义细胞的大小和数量
-var cellSize = 15;
+var cellSize = 10;
 var numCells = Math.floor(canvas.width / cellSize);
 
 // 创建细胞状态的二维数组

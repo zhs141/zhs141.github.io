@@ -1,78 +1,16 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>网站源代码爬虫</title>
+    <title>生命游戏</title>
     <style>
-        body {
-            background-color: #99CCFF;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .input-field {
-            margin-bottom: 10px;
-        }
-
-        .button {
-            background-color: #000;
-            color: #fff;
-            border-radius: 5px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        .result {
-            margin-top: 20px;
-            white-space: pre-line;
-            overflow: auto;
-            max-height: 300px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            text-align: left;
+        canvas {
+            border: 1px solid #000;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="input-field">
-            <label for="url">网址:</label>
-            <input type="text" id="url">
-        </div>
-        <button class="button" id="viewSourceButton">查看源代码</button>
-        <div class="result" id="result"></div>
-    </div>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
 
-    <script>
-        const urlInput = document.getElementById("url");
-        const viewSourceButton = document.getElementById("viewSourceButton");
-        const resultDiv = document.getElementById("result");
-
-        viewSourceButton.addEventListener("click", viewSource);
-
-        function viewSource() {
-            const url = urlInput.value;
-
-            fetch(url)
-                .then(response => response.text())
-                .then(sourceCode => {
-                    resultDiv.innerText = sourceCode;
-                })
-                .catch(error => {
-                    resultDiv.innerText = "无法获取网页源代码";
-                });
-        }
-    </script>
+    <script src="game.js"></script>
 </body>
 </html>

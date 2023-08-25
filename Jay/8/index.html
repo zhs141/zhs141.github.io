@@ -12,7 +12,7 @@
         }
 
         .container {
-            background-color: #fff;
+            background-color: #222;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -34,8 +34,11 @@
 <body>
     <div class="container">
         <input type="range" class="slider" min="0" max="255" value="0" id="redSlider">
+        <div id="result1"></div>
         <input type="range" class="slider" min="0" max="255" value="0" id="greenSlider">
+        <div id="result2"></div>
         <input type="range" class="slider" min="0" max="255" value="0" id="blueSlider">
+        <div id="result3"></div>
         <center><div class="color-box" id="colorBox"></div></center>
     </div>
 
@@ -49,6 +52,10 @@
         greenSlider.addEventListener("input", updateColor);
         blueSlider.addEventListener("input", updateColor);
 
+var resultDivOne = document.getElementById('result1');
+var resultDivTwo = document.getElementById('result2');
+var resultDivThree = document.getElementById('result3');
+
         function updateColor() {
             const red = redSlider.value;
             const green = greenSlider.value;
@@ -56,6 +63,9 @@
 
             const color = `rgb(${red}, ${green}, ${blue})`;
             colorBox.style.backgroundColor = color;
+            resultDivOne.innerHTML = red;
+            resultDivTwo.innerHTML = green;
+            resultDivThree.innerHTML = blue;
         }
     </script>
 </body>

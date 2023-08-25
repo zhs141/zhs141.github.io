@@ -1,11 +1,3 @@
-// 更新细胞的数量
-numCells = Math.floor(canvas.width / cellSize);
-
-// 重新创建细胞状态的二维数组
-cells = [];
-for (var i = 0; i < numCells; i++) {
-    cells[i] = [];
-
 // 获取canvas元素和绘图上下文
 var canvas = document.getElementById("gameCanvas");
 var ctx = canvas.getContext("2d");

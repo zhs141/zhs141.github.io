@@ -1,59 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RGB调色器</title>
-  <style>
-    body {
-      background-color: #99CCFF;
-    }
+    <title>RGB调色器</title>
+    <style>
+        body {
+            background-color: #99CCFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    .color-box {
-      width: 200px;
-      height: 200px;
-      border: 1px solid black;
-      background-color: rgb(0, 0, 0);
-      margin: 20px;
-    }
+        .slider {
+            width: 200px;
+            margin-bottom: 10px;
+        }
 
-    .slider {
-      width: 200px;
-      margin: 20px;
-    }
-  </style>
+        .color-box {
+            width: 200px;
+            height: 200px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="color-box"></div>
-  </div>
+    <div class="container">
+        <input type="range" class="slider" min="0" max="255" value="0" id="redSlider">
+        <input type="range" class="slider" min="0" max="255" value="0" id="greenSlider">
+        <input type="range" class="slider" min="0" max="255" value="0" id="blueSlider">
+        <center><div class="color-box" id="colorBox"></div></center>
+    </div>
 
-  <input type="range" class="slider" id="red" min="0" max="255" value="0">
-  <input type="range" class="slider" id="green" min="0" max="255" value="0">
-  <input type="range" class="slider" id="blue" min="0" max="255" value="0">
+    <script>
+        const redSlider = document.getElementById("redSlider");
+        const greenSlider = document.getElementById("greenSlider");
+        const blueSlider = document.getElementById("blueSlider");
+        const colorBox = document.getElementById("colorBox");
 
-  <script>
-    const redSlider = document.getElementById('red');
-    const greenSlider = document.getElementById('green');
-    const blueSlider = document.getElementById('blue');
-    const colorBox = document.querySelector('.color-box');
+        redSlider.addEventListener("input", updateColor);
+        greenSlider.addEventListener("input", updateColor);
+        blueSlider.addEventListener("input", updateColor);
 
-    function updateColor() {
-      const redValue = redSlider.value;
-      const greenValue = greenSlider.value;
-      const blueValue = blueSlider.value;
+        function updateColor() {
+            const red = redSlider.value;
+            const green = greenSlider.value;
+            const blue = blueSlider.value;
 
-      colorBox.style.backgroundColor = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
-    }
-
-    redSlider.addEventListener('input', updateColor);
-    greenSlider.addEventListener('input', updateColor);
-    blueSlider.addEventListener('input', updateColor);
-  </script>
+            const color = `rgb(${red}, ${green}, ${blue})`;
+            colorBox.style.backgroundColor = color;
+        }
+    </script>
 </body>
 </html>

@@ -2,17 +2,25 @@
 var canvas = document.getElementById("gameCanvas");
 var ctx = canvas.getContext("2d");
 
-// 定义细胞的大小和数量
-var cellSize = 10;
-var numCells = Math.floor(canvas.width / cellSize);
+// 动态调整画布大小
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    numCells = Math.floor(canvas.width / cellSize);
+    cells = initializeCells();
+}
 
-// 创建细胞状态的二维数组
-var cells = [];
-for (var i = 0; i < numCells; i++) {
-    cells[i] = [];
-    for (var j = 0; j < numCells; j++) {
-        cells[i][j] = Math.random() > 0.5 ? 1 : 0; // 随机初始化细胞状态
+// 初始化细胞状态的二维数组
+function initializeCells() {
+    var cells = [];
+    for (var i = 0; i < numCells; i++) {
+        cells[i] = [];
+        for (var j = 0; j < numCells; j++) {
+            cells[i][j] = Math.random() > 0.5 ? 1 : 0; // 随机初始化细胞状态
+        }
     }
+    return cells;
 }
 
 // 绘制细胞
@@ -85,6 +93,12 @@ function gameLoop() {
 
     requestAnimationFrame(gameLoop);
 }
+
+// 监听窗口大小变化事件
+window.addEventListener("resize", resizeCanvas);
+
+// 初始化画布大小
+resizeCanvas();
 
 // 启动游戏循环
 gameLoop();

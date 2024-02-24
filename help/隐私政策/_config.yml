@@ -1,5 +1,0 @@
-title: 隐私政策 
- description: 关于您访问zhs141.github.io的隐私政策 
- remote_theme: pages-themes/architect@v0.2.0 
- plugins: 
- - jekyll-Architect-theme

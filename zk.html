@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中考倒计时</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .countdown {
+        font-size: 24px;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<div class="countdown" id="countdown"></div>
+
+<script>
+    // 设置中考日期（假设为2024年6月24日）
+    const examDate = new Date('2024-06-24');
+    // 设置当前日期
+    const currentDate = new Date();
+    // 计算距离中考还有的天数
+    const daysLeft = Math.ceil((examDate - currentDate) / (1000 * 60 * 60 * 24));
+
+    // 在页面中显示倒计时
+    document.getElementById('countdown').innerText = `距离中考还有 ${daysLeft} 天`;
+</script>
+</body>
+</html>
